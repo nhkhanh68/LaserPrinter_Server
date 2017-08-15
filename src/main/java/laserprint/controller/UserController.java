@@ -41,8 +41,8 @@ public class UserController {
     }
 
     @RequestMapping(value = "qrCode", method = RequestMethod.POST)
-    public void readQRCode(@RequestBody QRCodeDTO qrCodeDTO){
-        userService.readQRCode(qrCodeDTO);
+    public QRCodeDTO readQRCode(@RequestBody QRCodeDTO qrCodeDTO) throws Exception {
+        return userService.readQRCode(qrCodeDTO);
     }
 
     @RequestMapping(value = "book", method = RequestMethod.GET)

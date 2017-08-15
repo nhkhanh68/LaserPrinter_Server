@@ -82,7 +82,7 @@ public class UserService {
         }
     }
 
-    public void readQRCode(QRCodeDTO qrCodeDTO) {
+    public QRCodeDTO readQRCode(QRCodeDTO qrCodeDTO) throws Exception {
         if(qrCodeDTO.getQrData() != null && qrCodeDTO.getReaderId()!= null && qrCodeDTO.getReadTime() != null){
             QRCode qrCode = new QRCode(qrCodeDTO.getReaderId(), qrCodeDTO.getReadTime(), qrCodeDTO.getQrData());
             qrCodeRepository.save(qrCode);
@@ -91,14 +91,20 @@ public class UserService {
             if(student == null){
                 studentDTO.setFullName("Không tìm thấy sinh viên");
                 studentDTO.setAddress("NF");
-
+                simpMessagingTemplate.convertAndSend("/user/khanh/**", studentDTO);
+                qrCodeDTO.setQrData("Không tìm thấy sinh viên");
+                return qrCodeDTO;
             } else {
                 studentDTO.setFullName(student.getFullName());
                 studentDTO.setAddress("F");
                 studentDTO.setId(student.getId());
                 studentDTO.setStudentCode(student.getStudentCode());
+                simpMessagingTemplate.convertAndSend("/user/khanh/**", studentDTO);
+                qrCodeDTO.setQrData(student.getFullName());
+                return qrCodeDTO;
             }
-            simpMessagingTemplate.convertAndSend("/user/khanh/**", studentDTO);
+        } else {
+            throw new Exception("Thiếu dữ liệu!");
         }
     }
 
