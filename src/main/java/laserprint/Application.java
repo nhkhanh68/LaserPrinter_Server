@@ -30,7 +30,9 @@ public class Application {
                 HttpServletResponse response = (HttpServletResponse) res;
                 String method = request.getMethod();
 // this origin value could just as easily have come from a database
-                response.setHeader("Access-Control-Allow-Origin", "*");
+//                response.setHeader("Access-Control-Allow-Origin", "*");
+
+                response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
                 response.setHeader("Access-Control-Allow-Methods",
                         "POST,GET,OPTIONS,DELETE,PUT");
                 response.setHeader("Access-Control-Max-Age", Long.toString(60 * 60));

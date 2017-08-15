@@ -1,5 +1,6 @@
 package laserprint.controller;
 
+import laserprint.DTO.BookDTO;
 import laserprint.DTO.QRCodeDTO;
 import laserprint.DTO.UserDTO;
 import laserprint.model.Book;
@@ -52,6 +53,11 @@ public class UserController {
     @RequestMapping(value = "bookStudent", method = RequestMethod.GET)
     public List<BookStudent> getAllBookStudent(){
         return userService.getAllBookStudent();
+    }
+
+    @RequestMapping(value = "borrowBook", method = RequestMethod.POST)
+    public BookStudent borrowBook(@RequestBody BookDTO bookDTO) throws Exception {
+        return userService.borrowBook(bookDTO);
     }
 
 }
