@@ -1,5 +1,7 @@
 package laserprint.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -16,6 +18,7 @@ public class Book {
     private int id;
     private String bookName;
     @OneToMany(mappedBy = "book")
+    @JsonIgnore
     private List<BookStudent> bookStudents;
 
     public int getId() {

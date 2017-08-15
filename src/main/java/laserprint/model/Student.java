@@ -31,6 +31,7 @@ public class Student {
 //    private User user;
 
     @OneToMany(mappedBy = "student")
+    @JsonIgnore
     private List<BookStudent> bookStudents;
 
     public void setId(int id) {
