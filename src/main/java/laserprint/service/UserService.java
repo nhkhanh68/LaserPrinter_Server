@@ -153,4 +153,13 @@ public class UserService {
             throw new Exception("Không tìm thấy sinh viên");
         }
     }
+
+    public void deleteBookStudent(int id) throws Exception {
+        BookStudent bookStudent = bookStudentRepository.findOne(id);
+        if(bookStudent != null){
+            bookStudentRepository.delete(bookStudent);
+        } else {
+            throw new Exception("Không tìm thấy dữ liệu cần xóa!");
+        }
+    }
 }
