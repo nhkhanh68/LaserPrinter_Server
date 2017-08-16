@@ -57,6 +57,11 @@ public class UserController {
         return userService.getAllBookStudent();
     }
 
+    @RequestMapping(value = "bookStudent/{id}/delete", method = RequestMethod.DELETE)
+    public void deleteBookStudent(@PathVariable("id") int id) throws Exception {
+        userService.deleteBookStudent(id);
+    }
+
     @RequestMapping(value = "borrowBook", method = RequestMethod.POST)
     public BookStudent borrowBook(@RequestBody BookDTO bookDTO) throws Exception {
         return userService.borrowBook(bookDTO);
