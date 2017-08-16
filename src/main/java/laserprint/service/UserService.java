@@ -115,4 +115,32 @@ public class UserService {
     public List<Book> getAllBook(){
         return bookRepository.findAll();
     }
+
+    public Book addBook(BookDTO bookDTO){
+        Book book = new Book(bookDTO.getBookName());
+        return bookRepository.save(book);
+    }
+
+    public void deleteBook(int bookId) throws Exception {
+        Book book = bookRepository.findById(bookId);
+        if(book != null){
+            bookRepository.delete(book);
+        } else {
+            throw new Exception("Không tìm thấy sách");
+        }
+    }
+
+    public Student addStudent(StudentDTO studentDTO){
+        Student student = new Student(studentDTO.getFullName(), studentDTO.getStudentCode());
+        return studentRepository.save(student);
+    }
+
+    public void deleteStudent(int studentId) throws Exception {
+        Student student = studentRepository.findById(studentId);
+        if(student != null){
+            studentRepository.delete(student);
+        } else {
+            throw new Exception("Không tìm thấy sinh viên");
+        }
+    }
 }

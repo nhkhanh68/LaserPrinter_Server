@@ -9,6 +9,7 @@ public class BookDTO {
     private int bookId;
     private int studentId;
     private Date expiryDate;
+    private String bookName;
 
     public int getBookId() {
         return bookId;
@@ -32,5 +33,13 @@ public class BookDTO {
 
     public void setExpiryDate(Date expiryDate) {
         this.expiryDate = expiryDate;
+    }
+
+    public String getBookName() {
+        return bookName;
+    }
+
+    public void setBookName(String bookName) {
+        this.bookName = bookName;
     }
 }

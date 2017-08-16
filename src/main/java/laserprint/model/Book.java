@@ -21,6 +21,12 @@ public class Book {
     @JsonIgnore
     private List<BookStudent> bookStudents;
 
+    public Book(){}
+
+    public Book(String bookName){
+        this.bookName = bookName;
+    }
+
     public int getId() {
         return id;
     }

@@ -2,9 +2,11 @@ package laserprint.controller;
 
 import laserprint.DTO.BookDTO;
 import laserprint.DTO.QRCodeDTO;
+import laserprint.DTO.StudentDTO;
 import laserprint.DTO.UserDTO;
 import laserprint.model.Book;
 import laserprint.model.BookStudent;
+import laserprint.model.Student;
 import laserprint.model.User;
 import laserprint.service.UserService;
 //import laserprint.stereotype.RequiredRoles;
@@ -58,6 +60,30 @@ public class UserController {
     @RequestMapping(value = "borrowBook", method = RequestMethod.POST)
     public BookStudent borrowBook(@RequestBody BookDTO bookDTO) throws Exception {
         return userService.borrowBook(bookDTO);
+    }
+
+    //add book
+    @RequestMapping(value = "book/create", method = RequestMethod.POST)
+    public Book addbook(@RequestBody BookDTO bookDTO){
+        return userService.addBook(bookDTO);
+    }
+
+    //delete book
+    @RequestMapping(value = "book/{bookId}/delete", method = RequestMethod.DELETE)
+    public void deleteBook(@RequestParam("bookId") int bookId) throws Exception {
+        userService.deleteBook(bookId);
+    }
+
+    //add Student
+    @RequestMapping(value = "student/create", method = RequestMethod.POST)
+    public Student addbook(@RequestBody StudentDTO studentDTO){
+        return userService.addStudent(studentDTO);
+    }
+
+    //delete Student
+    @RequestMapping(value = "student/{studentId}/delete", method = RequestMethod.DELETE)
+    public void deleteStudent(@RequestParam("studentId") int studentId) throws Exception {
+        userService.deleteStudent(studentId);
     }
 
 }
