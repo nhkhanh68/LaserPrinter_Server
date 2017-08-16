@@ -34,6 +34,8 @@ public class Student {
     @JsonIgnore
     private List<BookStudent> bookStudents;
 
+    public Student(){}
+
     public Student(String fullName, String studentCode){
         this.fullName = fullName;
         this.studentCode = studentCode;

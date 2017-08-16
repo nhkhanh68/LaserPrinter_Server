@@ -130,9 +130,19 @@ public class UserService {
         }
     }
 
-    public Student addStudent(StudentDTO studentDTO){
-        Student student = new Student(studentDTO.getFullName(), studentDTO.getStudentCode());
-        return studentRepository.save(student);
+    public List<Student> getAllStudent(){
+        return (List<Student>) studentRepository.findAll();
+    }
+
+    public Student addStudent(StudentDTO studentDTO) throws Exception {
+        Student student1 = studentRepository.findByStudentCode(studentDTO.getStudentCode());
+        if(student1 == null){
+            Student student = new Student(studentDTO.getFullName(), studentDTO.getStudentCode());
+            return studentRepository.save(student);
+        } else {
+            throw new Exception("Mã sinh viên trùng");
+        }
+
     }
 
     public void deleteStudent(int studentId) throws Exception {

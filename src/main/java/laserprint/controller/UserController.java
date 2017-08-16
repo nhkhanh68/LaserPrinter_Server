@@ -70,20 +70,26 @@ public class UserController {
 
     //delete book
     @RequestMapping(value = "book/{bookId}/delete", method = RequestMethod.DELETE)
-    public void deleteBook(@RequestParam("bookId") int bookId) throws Exception {
+    public void deleteBook(@PathVariable("bookId") int bookId) throws Exception {
         userService.deleteBook(bookId);
     }
 
     //add Student
     @RequestMapping(value = "student/create", method = RequestMethod.POST)
-    public Student addbook(@RequestBody StudentDTO studentDTO){
+    public Student addbook(@RequestBody StudentDTO studentDTO) throws Exception {
         return userService.addStudent(studentDTO);
     }
 
     //delete Student
     @RequestMapping(value = "student/{studentId}/delete", method = RequestMethod.DELETE)
-    public void deleteStudent(@RequestParam("studentId") int studentId) throws Exception {
+    public void deleteStudent(@PathVariable("studentId") int studentId) throws Exception {
         userService.deleteStudent(studentId);
+    }
+
+    //get all student
+    @RequestMapping(value = "student", method = RequestMethod.GET)
+    public List<Student> getAllStudent(){
+        return userService.getAllStudent();
     }
 
 }
