@@ -91,7 +91,7 @@ public class UserService {
             if(student == null){
                 studentDTO.setFullName("Không tìm thấy sinh viên");
                 studentDTO.setAddress("NF");
-                simpMessagingTemplate.convertAndSend("/user/khanh/**", studentDTO);
+                simpMessagingTemplate.convertAndSend("/user/student/**", studentDTO);
                 qrCodeDTO.setQrData("Không tìm thấy sinh viên");
                 return qrCodeDTO;
             } else {
@@ -99,7 +99,7 @@ public class UserService {
                 studentDTO.setAddress("F");
                 studentDTO.setId(student.getId());
                 studentDTO.setStudentCode(student.getStudentCode());
-                simpMessagingTemplate.convertAndSend("/user/khanh/**", studentDTO);
+                simpMessagingTemplate.convertAndSend("/user/student/**", studentDTO);
                 qrCodeDTO.setQrData(student.getFullName());
                 return qrCodeDTO;
             }

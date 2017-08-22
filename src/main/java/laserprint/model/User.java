@@ -18,6 +18,7 @@ public class User {
     @JsonIgnore
     private String password;
     private String token;
+    private String role;
 
     public User(){
     }
@@ -52,5 +53,13 @@ public class User {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }
