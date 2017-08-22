@@ -14,8 +14,8 @@ public class Book {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-
     private int id;
+
     private String bookName;
     @OneToMany(mappedBy = "book")
     @JsonIgnore
