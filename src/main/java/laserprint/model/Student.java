@@ -36,9 +36,13 @@ public class Student {
 
     public Student(){}
 
-    public Student(String fullName, String studentCode){
+    public Student(String fullName, String studentCode, String birthday, String phoneNumber, String desire, String address){
         this.fullName = fullName;
         this.studentCode = studentCode;
+        this.address = address;
+        this.birthday = birthday;
+        this.phoneNumber = phoneNumber;
+        this.desire = desire;
     }
 
     public void setId(int id) {

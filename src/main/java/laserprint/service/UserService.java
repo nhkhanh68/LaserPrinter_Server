@@ -137,7 +137,7 @@ public class UserService {
     public Student addStudent(StudentDTO studentDTO) throws Exception {
         Student student1 = studentRepository.findByStudentCode(studentDTO.getStudentCode());
         if(student1 == null){
-            Student student = new Student(studentDTO.getFullName(), studentDTO.getStudentCode());
+            Student student = new Student(studentDTO.getFullName(), studentDTO.getStudentCode(), studentDTO.getBirthday(), studentDTO.getPhoneNumber(), studentDTO.getDesire(), studentDTO.getAddress());
             return studentRepository.save(student);
         } else {
             throw new Exception("Mã sinh viên trùng");
