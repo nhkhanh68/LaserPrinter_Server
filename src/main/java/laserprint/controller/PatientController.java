@@ -55,4 +55,10 @@ public class PatientController {
     public void deleteHealthRecords(@PathVariable("id") int id) throws Exception {
         patientService.deleteHealth(id);
     }
+
+    //get all healthRecords of patient
+    @RequestMapping(value = "healthRecords/{id}", method = RequestMethod.GET)
+    public List<HealthRecords> getAllHealthRecordsOfPatient(@PathVariable("id") int id){
+        return patientService.getALlHealthRecordsOfPatient(id);
+    }
 }

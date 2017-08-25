@@ -88,4 +88,8 @@ public class PatientService {
         }
     }
 
+    public List<HealthRecords> getALlHealthRecordsOfPatient(int patientId){
+        return healthRecordsRepository.findByPatientId(patientId);
+    }
+
 }
