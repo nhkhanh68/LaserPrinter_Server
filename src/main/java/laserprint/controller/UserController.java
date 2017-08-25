@@ -97,4 +97,10 @@ public class UserController {
         return userService.getAllStudent();
     }
 
+    //get all book student of student
+    @RequestMapping(value = "bookStudent/{studentId}", method = RequestMethod.GET)
+    public List<BookStudent> getAllBookStudentOfStudent(@PathVariable("studentId") int studentId){
+        return userService.getAllBookStudentOfStudent(studentId);
+    }
+
 }

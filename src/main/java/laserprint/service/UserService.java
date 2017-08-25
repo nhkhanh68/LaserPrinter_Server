@@ -162,4 +162,8 @@ public class UserService {
             throw new Exception("Không tìm thấy dữ liệu cần xóa!");
         }
     }
+
+    public List<BookStudent> getAllBookStudentOfStudent(int studentId){
+        return bookStudentRepository.findByStudentId(studentId);
+    }
 }
