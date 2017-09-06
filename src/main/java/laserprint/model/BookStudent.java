@@ -16,6 +16,7 @@ public class BookStudent {
 
     private Date borrowedDate;
     private Date expiryDate;
+    private String status;
 //    @Id
     @ManyToOne
     @JoinColumn(name = "book_id")
@@ -32,6 +33,7 @@ public class BookStudent {
         this.book = book;
         this.student = student;
         this.expiryDate = expiryDate;
+        this.status = "Đang mượn";
         this.borrowedDate = new Date();
     }
 
@@ -73,5 +75,13 @@ public class BookStudent {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

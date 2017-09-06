@@ -22,15 +22,21 @@ public class HealthRecords {
 //    private String chuanDoanBenh;
     private String ppDieuTri;
     private String ngayKhamLai;
+    private String chiSoCoBan;
+    private String notice;
+
     public HealthRecords(){}
 
-    public HealthRecords(Patient patient, String content, String date, String lyDoKham, String ppDieuTri, String ngayKhamLai){
+    public HealthRecords(Patient patient, String content, String date, String lyDoKham, String ppDieuTri,
+                         String chiSoCoBan, String ngayKhamLai, String notice){
         this.patient = patient;
         this.content = content;
         this.date = date;
         this.lyDoKham = lyDoKham;
         this.ppDieuTri = ppDieuTri;
         this.ngayKhamLai = ngayKhamLai;
+        this.chiSoCoBan = chiSoCoBan;
+        this.notice = notice;
     }
 
     public int getId() {
@@ -87,5 +93,21 @@ public class HealthRecords {
 
     public void setNgayKhamLai(String ngayKhamLai) {
         this.ngayKhamLai = ngayKhamLai;
+    }
+
+    public String getChiSoCoBan() {
+        return chiSoCoBan;
+    }
+
+    public void setChiSoCoBan(String chiSoCoBan) {
+        this.chiSoCoBan = chiSoCoBan;
+    }
+
+    public String getNotice() {
+        return notice;
+    }
+
+    public void setNotice(String notice) {
+        this.notice = notice;
     }
 }

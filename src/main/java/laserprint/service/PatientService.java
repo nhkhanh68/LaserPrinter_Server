@@ -25,7 +25,8 @@ public class PatientService {
     private final QRCodeRepository qrCodeRepository;
 
     @Autowired
-    public PatientService(PatientRepository patientRepository, HealthRecordsRepository healthRecordsRepository, SimpMessagingTemplate simpMessagingTemplate, QRCodeRepository qrCodeRepository) {
+    public PatientService(PatientRepository patientRepository, HealthRecordsRepository healthRecordsRepository,
+                          SimpMessagingTemplate simpMessagingTemplate, QRCodeRepository qrCodeRepository) {
         this.patientRepository = patientRepository;
         this.healthRecordsRepository = healthRecordsRepository;
         this.simpMessagingTemplate = simpMessagingTemplate;
@@ -37,7 +38,8 @@ public class PatientService {
     }
 
     public Patient createPatient(PatientDTO patientDTO){
-        Patient patient = new Patient(patientDTO.getPatientCode(), patientDTO.getName(), patientDTO.getAddress(), patientDTO.getDateOfBirth());
+        Patient patient = new Patient(patientDTO.getPatientCode(), patientDTO.getName(), patientDTO.getAddress(),
+                patientDTO.getDateOfBirth(), patientDTO.getPhone(), patientDTO.getTieuSuBenh());
         return patientRepository.save(patient);
     }
 
@@ -57,7 +59,9 @@ public class PatientService {
     public HealthRecords createHealthRecords(PatientDTO patientDTO) throws Exception {
         Patient patient = patientRepository.findById(patientDTO.getPatientId());
         if(patient != null){
-            HealthRecords healthRecords = new HealthRecords(patient, patientDTO.getContent(), patientDTO.getDate(),patientDTO.getLyDoKham(), patientDTO.getPpDieuTri(), patientDTO.getNgayKhamLai());
+            HealthRecords healthRecords = new HealthRecords(patient, patientDTO.getContent(), patientDTO.getDate(),
+                    patientDTO.getLyDoKham(), patientDTO.getPpDieuTri(), patientDTO.getChiSoCoBan(),
+                    patientDTO.getNgayKhamLai(), patientDTO.getNotice());
             return healthRecordsRepository.save(healthRecords);
         } else {
             throw new Exception("Khong tim thay benh nhan!");
@@ -84,6 +88,7 @@ public class PatientService {
             patientDTO.setDateOfBirth(patient.getDateOfBirth());
             patientDTO.setAddress(patient.getAddress());
             patientDTO.setPatientId(patient.getId());
+            patientDTO.setPatient(patient);
             simpMessagingTemplate.convertAndSend("/user/patient/**", patientDTO);
         }
     }
