@@ -25,6 +25,7 @@ public class Student {
     private String desire;
     private String avatar;
     private String studentCode;
+    private String cash;
 //    @OneToOne(cascade = CascadeType.ALL)
 //    @JoinColumn(name = "user_id")
 //    @JsonIgnore
@@ -34,9 +35,18 @@ public class Student {
     @JsonIgnore
     private List<BookStudent> bookStudents;
 
+
+    @OneToMany(mappedBy = "student")
+    @JsonIgnore
+    private List<GuiXe> guiXes;
+
     public Student(){}
 
-    public Student(String fullName, String studentCode){
+    public Student(String birthday, String phoneNumber, String address, String desire, String fullName, String studentCode) {
+        this.birthday = birthday;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+        this.desire = desire;
         this.fullName = fullName;
         this.studentCode = studentCode;
     }
@@ -135,5 +145,21 @@ public class Student {
 
     public void setStudentCode(String studentCode) {
         this.studentCode = studentCode;
+    }
+
+    public String getCash() {
+        return cash;
+    }
+
+    public void setCash(String cash) {
+        this.cash = cash;
+    }
+
+    public List<GuiXe> getGuiXes() {
+        return guiXes;
+    }
+
+    public void setGuiXes(List<GuiXe> guiXes) {
+        this.guiXes = guiXes;
     }
 }

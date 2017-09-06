@@ -1,5 +1,7 @@
 package laserprint.DTO;
 
+import laserprint.model.Patient;
+
 public class PatientDTO {
     private int id;
     private String patientCode;
@@ -11,10 +13,16 @@ public class PatientDTO {
     private String ppDieuTri;
     private String ngayKhamLai;
 
+    private String phone;
+    private String tieuSuBenh;
+
     private int patientId;
 
     private String date;
     private String content;
+    private String chiSoCoBan;
+    private String notice;
+    private Patient patient;
 
     public int getId() {
         return id;
@@ -102,5 +110,45 @@ public class PatientDTO {
 
     public void setNgayKhamLai(String ngayKhamLai) {
         this.ngayKhamLai = ngayKhamLai;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getTieuSuBenh() {
+        return tieuSuBenh;
+    }
+
+    public void setTieuSuBenh(String tieuSuBenh) {
+        this.tieuSuBenh = tieuSuBenh;
+    }
+
+    public String getChiSoCoBan() {
+        return chiSoCoBan;
+    }
+
+    public void setChiSoCoBan(String chiSoCoBan) {
+        this.chiSoCoBan = chiSoCoBan;
+    }
+
+    public String getNotice() {
+        return notice;
+    }
+
+    public void setNotice(String notice) {
+        this.notice = notice;
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
     }
 }

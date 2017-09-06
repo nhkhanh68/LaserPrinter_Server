@@ -16,14 +16,18 @@ public class Patient {
     private String name;
     private String address;
     private String dateOfBirth;
+    private String phone;
+    private String tieuSuBenh;
 
     public Patient(){}
 
-    public Patient(String patientCode, String name, String address, String dateOfBirth){
+    public Patient(String patientCode, String name, String address, String dateOfBirth, String phone, String tieuSuBenh){
         this.patientCode = patientCode;
         this.name = name;
         this.address = address;
         this.dateOfBirth = dateOfBirth;
+        this.phone = phone;
+        this.tieuSuBenh = tieuSuBenh;
     }
 
     @OneToMany(mappedBy = "patient")
@@ -77,5 +81,21 @@ public class Patient {
 
     public void setHealthRecords(List<HealthRecords> healthRecords) {
         this.healthRecords = healthRecords;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getTieuSuBenh() {
+        return tieuSuBenh;
+    }
+
+    public void setTieuSuBenh(String tieuSuBenh) {
+        this.tieuSuBenh = tieuSuBenh;
     }
 }

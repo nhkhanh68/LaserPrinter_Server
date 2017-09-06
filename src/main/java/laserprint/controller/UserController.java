@@ -4,10 +4,7 @@ import laserprint.DTO.BookDTO;
 import laserprint.DTO.QRCodeDTO;
 import laserprint.DTO.StudentDTO;
 import laserprint.DTO.UserDTO;
-import laserprint.model.Book;
-import laserprint.model.BookStudent;
-import laserprint.model.Student;
-import laserprint.model.User;
+import laserprint.model.*;
 import laserprint.service.UserService;
 //import laserprint.stereotype.RequiredRoles;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -97,10 +94,54 @@ public class UserController {
         return userService.getAllStudent();
     }
 
+    //tra sach
+    @RequestMapping(value = "traSach", method = RequestMethod.POST)
+    public void traSach(@RequestBody List<BookDTO> list){
+        userService.traSach(list);
+    }
+
     //get all book student of student
     @RequestMapping(value = "bookStudent/{studentId}", method = RequestMethod.GET)
     public List<BookStudent> getAllBookStudentOfStudent(@PathVariable("studentId") int studentId){
         return userService.getAllBookStudentOfStudent(studentId);
     }
+
+    //qrcode naptien
+    @RequestMapping(value = "qrcode/naptien", method = RequestMethod.POST)
+    public void readQRCodeNapTien(@RequestBody QRCodeDTO qrCodeDTO) throws Exception {
+        userService.readQRCodeNapTien(qrCodeDTO);
+    }
+
+    //them tien gui xe
+    @RequestMapping(value = "tienXe/them", method = RequestMethod.POST)
+    public void napTien(@RequestBody StudentDTO studentDTO){
+        userService.napTien(studentDTO);
+    }
+
+    @RequestMapping(value = "qrcode/checkinGuiXe", method = RequestMethod.POST)
+    public void checkinGuiXe(@RequestBody QRCodeDTO qrCodeDTO){
+        userService.checkinGuiXe(qrCodeDTO);
+    }
+
+    @RequestMapping(value = "qrcode/checkoutGuiXe", method = RequestMethod.POST)
+    public void checkoutGuiXe(@RequestBody QRCodeDTO qrCodeDTO){
+        userService.checkoutGuiXe(qrCodeDTO);
+    }
+
+    @RequestMapping(value = "guiXe", method = RequestMethod.GET)
+    public List<GuiXe> getAllGuiXe(){
+        return userService.getAllGuiXe();
+    }
+
+    @RequestMapping(value = "muctienguixe", method = RequestMethod.GET)
+    public UserDTO xemMucTienGuiXe(){
+        return userService.xemMucTienGuiXe();
+    }
+
+    @RequestMapping(value = "thayDoiMucTienGuiXe/{cash}", method = RequestMethod.POST)
+    public void thayDoiMucTienGuiXe(@PathVariable("cash") String cash){
+        userService.thayDoiMucTienGuiXe(cash);
+    }
+
 
 }

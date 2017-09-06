@@ -1,5 +1,7 @@
 package laserprint.DTO;
 
+import laserprint.model.Student;
+
 /**
  * Created by Trung on 7/11/2016.
  */
@@ -16,6 +18,8 @@ public class StudentDTO {
     private String lecturersEmail;
     private String STT;
     private String studentCode;
+    private Student student;
+    private String cash;
 
     public int getId() {
         return id;
@@ -111,5 +115,21 @@ public class StudentDTO {
 
     public void setStudentCode(String studentCode) {
         this.studentCode = studentCode;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
+
+    public String getCash() {
+        return cash;
+    }
+
+    public void setCash(String cash) {
+        this.cash = cash;
     }
 }

@@ -13,4 +13,5 @@ import java.util.List;
 public interface BookStudentRepository  extends CrudRepository<BookStudent, Integer> {
     List<BookStudent> findAll();
     List<BookStudent> findByStudentId (int id);
+    BookStudent findById(int id);
 }
