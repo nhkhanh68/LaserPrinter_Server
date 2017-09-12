@@ -9,6 +9,7 @@ public class GuiXeDTO {
     private int id;
     private Date checkIn;
     private Date checkout;
+    private String bienSo;
 
     public Student getStudent() {
         return student;
@@ -40,5 +41,13 @@ public class GuiXeDTO {
 
     public void setCheckout(Date checkout) {
         this.checkout = checkout;
+    }
+
+    public String getBienSo() {
+        return bienSo;
+    }
+
+    public void setBienSo(String bienSo) {
+        this.bienSo = bienSo;
     }
 }

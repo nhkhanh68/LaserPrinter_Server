@@ -12,16 +12,18 @@ public class GuiXe {
     private int id;
     private Date checkin;
     private Date checkout;
-
+    private String bienSo;
     @ManyToOne
     @JoinColumn(name = "student_id")
     private Student student;
+    private String status;
 
     public GuiXe(){}
 
-    public GuiXe(Student student){
+    public GuiXe(Student student, String s){
         this.student = student;
         this.checkin = new Date();
+        this.bienSo = s;
     }
 
     public int getId() {
@@ -54,5 +56,21 @@ public class GuiXe {
 
     public void setStudent(Student student) {
         this.student = student;
+    }
+
+    public String getBienSo() {
+        return bienSo;
+    }
+
+    public void setBienSo(String bienSo) {
+        this.bienSo = bienSo;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

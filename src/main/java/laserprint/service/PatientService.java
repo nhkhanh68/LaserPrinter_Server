@@ -43,6 +43,20 @@ public class PatientService {
         return patientRepository.save(patient);
     }
 
+    public Patient editPatient(PatientDTO patientDTO) throws Exception {
+        Patient patient = patientRepository.findById(patientDTO.getPatientId());
+        if(patient != null){
+            patient.setAddress(patientDTO.getAddress());
+            patient.setDateOfBirth(patientDTO.getDateOfBirth());
+//            patient.setName(patientDTO.getName());
+            patient.setPhone(patientDTO.getPhone());
+            patient.setTieuSuBenh(patientDTO.getTieuSuBenh());
+            return patientRepository.save(patient);
+        } else {
+            throw new Exception("Không tìm thấy bệnh nhân!");
+        }
+    }
+
     public void deletePatient(int id) throws Exception {
         Patient patient = patientRepository.findById(id);
         if(patient != null){

@@ -7,10 +7,13 @@ import laserprint.model.QRCode;
 import laserprint.repository.CheckInRepository;
 import laserprint.repository.NhanVienRepository;
 import laserprint.repository.QRCodeRepository;
+import org.hibernate.annotations.Check;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -61,6 +64,8 @@ public class NhanVienService {
     }
 
     public void checkin(QRCodeDTO qrCodeDTO) throws Exception {
+        Date date = new Date();
+        System.out.print(date);
         if(qrCodeDTO.getQrData() != null && qrCodeDTO.getReaderId()!= null && qrCodeDTO.getReadTime() != null){
             QRCode qrCode = new QRCode(qrCodeDTO.getReaderId(), qrCodeDTO.getReadTime(), qrCodeDTO.getQrData());
             qrCodeRepository.save(qrCode);
@@ -73,14 +78,21 @@ public class NhanVienService {
                 Calendar cal = Calendar.getInstance();
                 int dayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
                 String dayOfMonthStr = String.valueOf(dayOfMonth);
-                CheckIn checkIn = checkInRepository.findByNhanVienIdAndNgay(nhanVien.getId(), dayOfMonthStr);
+                System.out.print("\n" + qrCodeDTO.getReadTime().getDate() + "\n");
+                CheckIn checkIn = checkInRepository.findByNhanVienIdAndNgay(nhanVien.getId(), String.valueOf(qrCodeDTO.getReadTime().getDate()));
                 if(checkIn.getCheckin() == null){
                     checkIn.setCheckin(qrCodeDTO.getReadTime());
                     checkInRepository.save(checkIn);
-                    System.out.print("\n" + checkIn.getCheckin().getHours() + "\n");
+//                    System.out.print("\n" + checkIn.getCheckin().getHours() + "\n");
                     if(checkIn.getCheckin().getHours() > 8){
                         checkIn.setStatus("Muộn");
                         checkInRepository.save(checkIn);
+                    } else if(checkIn.getCheckin().getHours() == 8){
+//                        System.out.print("\n" + checkIn.getCheckin().getMinutes() + "\n");
+                        if(checkIn.getCheckin().getMinutes() > 0){
+                            checkIn.setStatus("Muộn");
+                            checkInRepository.save(checkIn);
+                        }
                     }
                     simpMessagingTemplate.convertAndSend("/user/nhanvien/**", "Cam on!");
                 } else {
@@ -98,6 +110,48 @@ public class NhanVienService {
             }
         } else {
             throw new Exception("Thiếu dữ liệu!");
+        }
+    }
+
+    public static int randBetween(int start, int end) {
+        return start + (int)Math.round(Math.random() * (end - start));
+    }
+
+    public void initDataCheckinNhanVien() throws ParseException {
+        List<NhanVien> list = (List<NhanVien>) nhanVienRepository.findAll();
+        for (NhanVien nhanVien : list){
+            int ngay = 4;
+            int nhanVienId = nhanVien.getId();
+            for(ngay = 4; ngay <= 30; ngay ++){
+                CheckIn checkIn = checkInRepository.findByNhanVienIdAndNgay(nhanVienId, String.valueOf(ngay));
+                if(checkIn != null) {
+                    int gio = randBetween(6, 8);
+                    int phut = randBetween(0, 59);
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
+                    String dateInString = ngay + "-09" + "-2017" + " " + gio + ":" + phut + ":00";
+                    Date date = simpleDateFormat.parse(dateInString);
+                    if (date.getDay() == 0 || date.getDay() == 6) {
+//                    continue;
+                        checkInRepository.delete(checkIn);
+                    } else {
+                        checkIn.setCheckin(date);
+//                        System.out.println(date.getDay());
+                        if (checkIn.getCheckin().getHours() == 8) {
+                            if (checkIn.getCheckin().getMinutes() > 0) {
+                                checkIn.setStatus("Muộn");
+                                checkInRepository.save(checkIn);
+                            }
+                        }
+                        gio = randBetween(17, 18);
+                        phut = randBetween(0, 59);
+                        dateInString = ngay + "-09" + "-2017" + " " + gio + ":" + phut + ":00";
+                        date = simpleDateFormat.parse(dateInString);
+                        checkIn.setCheckout(date);
+                        checkInRepository.save(checkIn);
+                    }
+                }
+//                System.out.println(date); //Tue Aug 31 10:20:56 SGT 1982
+            }
         }
     }
 

@@ -7,6 +7,7 @@ import laserprint.service.NhanVienService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.List;
 
 @RestController
@@ -25,6 +26,12 @@ public class NhanVienController {
 
 //    @RequestMapping(value = "nhanvien/delete", method = RequestMethod.DELETE)
 //    public void deleteNhanVien()
+
+    //init data checkin nhan vien
+    @RequestMapping(value = "initdata", method = RequestMethod.POST)
+    public void initData() throws ParseException {
+        nhanVienService.initDataCheckinNhanVien();
+    }
 
     @RequestMapping(value = "nhanvien/checkin", method = RequestMethod.POST)
     public void checkInNhanVien(@RequestBody QRCodeDTO qrCodeDTO) throws Exception {
