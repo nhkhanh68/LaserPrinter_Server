@@ -252,7 +252,7 @@ public class UserService {
                 if (guiXe2 != null) {
                     if (guiXe2.getCheckout() != null) {
                         char maQuan = (char) randBetween(65, 75);
-                        String maVung = String.valueOf(randBetween(10, 99));
+                        String maVung = String.valueOf(randBetween(10, 35));
                         String bienSo = String.format("%05d", randBetween(1, 9999));
 //                    System.out.print(maVung + maQuan + " - " + bienSo);
                         GuiXe guiXe1 = new GuiXe(student, maVung + maQuan + " - " + bienSo);
