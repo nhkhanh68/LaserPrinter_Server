@@ -1,6 +1,7 @@
 package laserprint.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import sun.rmi.runtime.Log;
 
 import javax.persistence.*;
 import java.util.List;
@@ -30,6 +31,10 @@ public class Student {
 //    @JoinColumn(name = "user_id")
 //    @JsonIgnore
 //    private User user;
+
+    @OneToMany(mappedBy = "student")
+    @JsonIgnore
+    private List<LogTien> logTiens;
 
     @OneToMany(mappedBy = "student")
     @JsonIgnore
@@ -161,5 +166,13 @@ public class Student {
 
     public void setGuiXes(List<GuiXe> guiXes) {
         this.guiXes = guiXes;
+    }
+
+    public List<LogTien> getLogTiens() {
+        return logTiens;
+    }
+
+    public void setLogTiens(List<LogTien> logTiens) {
+        this.logTiens = logTiens;
     }
 }

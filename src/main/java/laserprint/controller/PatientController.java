@@ -36,6 +36,11 @@ public class PatientController {
         return patientService.createPatient(patientDTO);
     }
 
+    @RequestMapping(value = "patient/edit", method = RequestMethod.POST)
+    public Patient editPatient(@RequestBody PatientDTO patientDTO) throws Exception {
+        return patientService.editPatient(patientDTO);
+    }
+
     @RequestMapping(value = "patient/{patientId}/delete", method = RequestMethod.DELETE)
     public void deletePatient(@PathVariable("patientId") int patientId) throws Exception {
         patientService.deletePatient(patientId);

@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface GuiXeRepository extends CrudRepository<GuiXe, Integer> {
     GuiXe findTopByStudentIdAndCheckinIsNotNullAndCheckoutIsNull(int id);
+    GuiXe findTopByStudentIdOrderByIdDesc(int studentId);
 }

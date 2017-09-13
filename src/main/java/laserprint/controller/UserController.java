@@ -123,10 +123,10 @@ public class UserController {
         userService.checkinGuiXe(qrCodeDTO);
     }
 
-    @RequestMapping(value = "qrcode/checkoutGuiXe", method = RequestMethod.POST)
-    public void checkoutGuiXe(@RequestBody QRCodeDTO qrCodeDTO){
-        userService.checkoutGuiXe(qrCodeDTO);
-    }
+//    @RequestMapping(value = "qrcode/checkoutGuiXe", method = RequestMethod.POST)
+//    public void checkoutGuiXe(@RequestBody QRCodeDTO qrCodeDTO){
+//        userService.checkoutGuiXe(qrCodeDTO);
+//    }
 
     @RequestMapping(value = "guiXe", method = RequestMethod.GET)
     public List<GuiXe> getAllGuiXe(){
@@ -143,5 +143,9 @@ public class UserController {
         userService.thayDoiMucTienGuiXe(cash);
     }
 
+    @RequestMapping(value = "logtien/{studentId}", method = RequestMethod.GET)
+    public List<LogTien> getAllLogTienStudent(@PathVariable("studentId") int studentId){
+        return userService.getAllLogTienStudent(studentId);
+    }
 
 }
