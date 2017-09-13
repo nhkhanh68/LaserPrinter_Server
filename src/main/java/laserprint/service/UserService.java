@@ -230,7 +230,7 @@ public class UserService {
             } else {
                 cash = studentDTO.getCash();
             }
-            LogTien logTien = new LogTien("Cộng", cash, student);
+            LogTien logTien = new LogTien("Thêm tiền", cash, student);
             student.setCash(studentDTO.getCash());
             studentRepository.save(student);
             logTienRepository.save(logTien);
@@ -270,17 +270,23 @@ public class UserService {
                             if (Integer.valueOf(student.getCash()) < Integer.valueOf(user.getPassword())) {
                                 guiXe2.setStatus("Không đủ tiền!");
                                 simpMessagingTemplate.convertAndSend("/user/checkinGuiXe/**", guiXe2);
+                                guiXe2.setStatus("Tiền mặt");
+                                guiXeRepository.save(guiXe2);
                             } else {
-                                LogTien logTien = new LogTien("Trừ ", user.getPassword(), student);
+                                LogTien logTien = new LogTien("Gửi xe ", user.getPassword(), student);
                                 logTienRepository.save(logTien);
                                 student.setCash(String.valueOf(Integer.valueOf(student.getCash()) - Integer.valueOf(user.getPassword())));
                                 studentRepository.save(student);
                                 guiXe2.setStatus("Thành công");
                                 simpMessagingTemplate.convertAndSend("/user/checkinGuiXe/**", guiXe2);
+                                guiXe2.setStatus("Thẻ");
+                                guiXeRepository.save(guiXe2);
                             }
                         } else if (student.getCash() == null) {
                             guiXe2.setStatus("Không đủ tiền!");
                             simpMessagingTemplate.convertAndSend("/user/checkinGuiXe/**", guiXe2);
+                            guiXe2.setStatus("Tiền mặt");
+                            guiXeRepository.save(guiXe2);
                         }
                     }
                 } else {
