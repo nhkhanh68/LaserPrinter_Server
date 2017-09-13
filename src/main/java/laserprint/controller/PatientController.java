@@ -20,7 +20,7 @@ public class PatientController {
         this.patientService = patientService;
     }
 
-    @RequestMapping(value = "qrCode/patient", method = RequestMethod.POST)
+    @RequestMapping(value = "qrcode/patient", method = RequestMethod.POST)
     public void readQrCodePatient(@RequestBody QRCodeDTO qrCodeDTO){
         patientService.readQrCodePatient(qrCodeDTO);
     }
