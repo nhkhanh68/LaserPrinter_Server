@@ -37,10 +37,15 @@ public class PatientService {
         return patientRepository.findAll();
     }
 
-    public Patient createPatient(PatientDTO patientDTO){
-        Patient patient = new Patient(patientDTO.getPatientCode(), patientDTO.getName(), patientDTO.getAddress(),
-                patientDTO.getDateOfBirth(), patientDTO.getPhone(), patientDTO.getTieuSuBenh());
-        return patientRepository.save(patient);
+    public Patient createPatient(Patient patientDTO){
+//        Patient patient = new Patient(patientDTO.getPatientCode(), patientDTO.getName(), patientDTO.getAddress(),
+//                patientDTO.getDateOfBirth(), patientDTO.getPhone(), patientDTO.getTieuSuBenh(), patientDTO.getGioiTinh(),
+//                patientDTO.getCmnd(), patientDTO.getDanToc(), patientDTO.getQuocTich(), patientDTO.getHktt(),
+//                patientDTO.getEmail(), patientDTO.getDeThieuThang(), patientDTO.getDeThuong(),patientDTO.getDeMo(),
+//                patientDTO.getCanNangLucDe(), patientDTO.getDiTatBamSinh(), patientDTO.getDiUngThuoc(), patientDTO.getDiUngHoaChat(),
+//                patientDTO.getDiUngThucPham(), patientDTO.getDiUngKhac(), patientDTO.getNoiSinh(), patientDTO.getBiNgatLucDe());
+//        Patient patient = patientDTO;
+        return patientRepository.save(patientDTO);
     }
 
     public Patient editPatient(PatientDTO patientDTO) throws Exception {
@@ -48,9 +53,24 @@ public class PatientService {
         if(patient != null){
             patient.setAddress(patientDTO.getAddress());
             patient.setDateOfBirth(patientDTO.getDateOfBirth());
-//            patient.setName(patientDTO.getName());
             patient.setPhone(patientDTO.getPhone());
             patient.setTieuSuBenh(patientDTO.getTieuSuBenh());
+            patient.setGioiTinh(patientDTO.getGioiTinh());
+            patient.setCmnd(patientDTO.getCmnd());
+            patient.setDanToc(patientDTO.getDanToc());
+            patient.setQuocTich(patientDTO.getQuocTich());
+            patient.setHktt(patientDTO.getHktt());
+            patient.setEmail(patientDTO.getEmail());
+            patient.setDeThieuThang(patientDTO.getDeThieuThang());
+            patient.setDeThuong(patientDTO.getDeThuong());
+            patient.setDeMo(patientDTO.getDeMo());
+            patient.setCanNangLucDe(patientDTO.getCanNangLucDe());
+            patient.setDiTatBamSinh(patientDTO.getDiTatBamSinh());
+            patient.setDiUngHoaChat(patientDTO.getDiUngHoaChat());
+            patient.setDiUngThucPham(patientDTO.getDiUngThucPham());
+            patient.setDiUngThuoc(patientDTO.getDiUngThuoc());
+            patient.setDiUngKhac(patientDTO.getDiUngKhac());
+            patient.setNoiSinh(patientDTO.getNoiSinh());
             return patientRepository.save(patient);
         } else {
             throw new Exception("Không tìm thấy bệnh nhân!");
@@ -70,12 +90,11 @@ public class PatientService {
         return healthRecordsRepository.findAll();
     }
 
-    public HealthRecords createHealthRecords(PatientDTO patientDTO) throws Exception {
-        Patient patient = patientRepository.findById(patientDTO.getPatientId());
+    public HealthRecords createHealthRecords(HealthRecords healthRecords, int patientId) throws Exception {
+        Patient patient = patientRepository.findById(patientId);
         if(patient != null){
-            HealthRecords healthRecords = new HealthRecords(patient, patientDTO.getContent(), patientDTO.getDate(),
-                    patientDTO.getLyDoKham(), patientDTO.getPpDieuTri(), patientDTO.getChiSoCoBan(),
-                    patientDTO.getNgayKhamLai(), patientDTO.getNotice());
+//            HealthRecords healthRecords = patientDTO;
+            healthRecords.setPatient(patient);
             return healthRecordsRepository.save(healthRecords);
         } else {
             throw new Exception("Khong tim thay benh nhan!");
