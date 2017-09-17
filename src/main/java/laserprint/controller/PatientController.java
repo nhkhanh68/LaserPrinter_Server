@@ -20,7 +20,7 @@ public class PatientController {
         this.patientService = patientService;
     }
 
-    @RequestMapping(value = "qrCode/patient", method = RequestMethod.POST)
+    @RequestMapping(value = "qrcode/patient", method = RequestMethod.POST)
     public void readQrCodePatient(@RequestBody QRCodeDTO qrCodeDTO){
         patientService.readQrCodePatient(qrCodeDTO);
     }
@@ -32,7 +32,7 @@ public class PatientController {
     }
 
     @RequestMapping(value = "patient/create", method = RequestMethod.POST)
-    public Patient createPatient(@RequestBody PatientDTO patientDTO){
+    public Patient createPatient(@RequestBody Patient patientDTO){
         return patientService.createPatient(patientDTO);
     }
 
@@ -51,9 +51,9 @@ public class PatientController {
         return patientService.getAllHealthRecords();
     }
 
-    @RequestMapping(value = "healthRecords/create", method = RequestMethod.POST)
-    public HealthRecords createHealthRecords(@RequestBody PatientDTO patientDTO) throws Exception {
-        return patientService.createHealthRecords(patientDTO);
+    @RequestMapping(value = "healthRecords/create/{id}", method = RequestMethod.POST)
+    public HealthRecords createHealthRecords(@RequestBody HealthRecords healthRecords, @PathVariable("id") int id) throws Exception {
+        return patientService.createHealthRecords(healthRecords, id);
     }
 
     @RequestMapping(value = "healthrecords/{id}/delete", method = RequestMethod.DELETE)
